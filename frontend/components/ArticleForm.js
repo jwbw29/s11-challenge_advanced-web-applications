@@ -29,11 +29,19 @@ export default function ArticleForm(props) {
   const isDisabled = () => {
     // ✨ implement
     // Make sure the inputs have some values
+        /**
+     * username.trim().length >= 3 && password.trim().length >= 8 ? false : true
+     */
+    return true
+  }
+
+  const cancelEdit = () => {
+    // [ ] Reset the form to initial values on click
   }
 
   return (
-    // ✨ fix the JSX: make the heading display either "Edit" or "Create"
-    // and replace Function.prototype with the correct function
+    // [ ] ✨ fix the JSX: make the heading display either "Edit" or "Create"
+    // [ ] and replace Function.prototype with the correct function
     <form id="form" onSubmit={onSubmit}>
       <h2>Create Article</h2>
       <input
