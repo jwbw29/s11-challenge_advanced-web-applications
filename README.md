@@ -13,11 +13,11 @@ In this challenge, you will write the logic for [THIS APP](https://advanced-apps
 
 ## Project Setup
 
-- Fork, clone, and `npm install`. You won't need to add any extra libraries.
-- Launch the project in a development server executing `npm run dev`.
-- Visit your app by navigating Chrome to `http://localhost:3000`.
-- Run tests locally executing `npm test`.
-- Local test modules are `codegrade_mvp.test.js` and `Spinner.test.js`.
+- [x] Fork, clone, and `npm install`. You won't need to add any extra libraries.
+- [x] Launch the project in a development server executing `npm run dev`.
+- [x] Visit your app by navigating Chrome to `http://localhost:3000`.
+- [x] Run tests locally executing `npm test`.
+- [x] Local test modules are `codegrade_mvp.test.js` and `Spinner.test.js`.
 
 ## Studying the prototype
 
@@ -63,15 +63,15 @@ The endpoints needed for this project are the following:
 
 In order to complete this project, you must fix the following modules:
 
-- [frontend/axios/index.js](frontend/axios/index.js)
-- [frontend/components/App.js](frontend/components/App.js)
-- [frontend/components/LoginForm.js](frontend/components/LoginForm.js)
-- [frontend/components/Articles.js](frontend/components/Articles.js)
-- [frontend/components/ArticleForm.js](frontend/components/ArticleForm.js)
+- [ ] [frontend/axios/index.js](frontend/axios/index.js)
+- [ ] [frontend/components/App.js](frontend/components/App.js)
+- [ ] [frontend/components/LoginForm.js](frontend/components/LoginForm.js)
+- [ ] [frontend/components/Articles.js](frontend/components/Articles.js)
+- [ ] [frontend/components/ArticleForm.js](frontend/components/ArticleForm.js)
 
 You must also also test the Spinner component in this module:
 
-- [frontend/components/Spinner.test.js](frontend/components/Spinner.test.js)
+- [ ] [frontend/components/Spinner.test.js](frontend/components/Spinner.test.js)
 
 ### Notes
 
