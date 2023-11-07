@@ -1,6 +1,11 @@
+# Where to pick up
+- working on getArticles after successful login and navigation to Articles
+- props are passed
+- currently just need to write the axiosWithAuth().get() and make sure the const URL inside App doesn't clash with the function that also has a variable w/ the url
+
 # Tests to Pass
 
-1. [ ] Submit credentials button is disabled until
+1. [x] Submit credentials button is disabled until
         - username (after trimming) is at least 3 chars AND
         - password (after trimming) is at least 8 chars
         - Review how to conditionally disable a button element.

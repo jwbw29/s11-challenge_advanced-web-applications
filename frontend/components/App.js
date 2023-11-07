@@ -5,6 +5,8 @@ import LoginForm from "./LoginForm";
 import Message from "./Message";
 import ArticleForm from "./ArticleForm";
 import Spinner from "./Spinner";
+import axios from "axios";
+import axiosWithAuth from "../axios/index";
 
 const articlesUrl = "http://localhost:9000/api/articles";
 const loginUrl = "http://localhost:9000/api/login";
@@ -18,11 +20,12 @@ export default function App() {
 
   const navigate = useNavigate();
   const redirectToLogin = () => {
-    navigate("/login");
+    navigate("/");
   };
   const redirectToArticles = () => {
     /* ✨ implement */
     // [ ] When would I need to redirect to articles? The only other landing pages is login, right?
+    navigate("/articles");
   };
 
   const logout = () => {
@@ -30,35 +33,50 @@ export default function App() {
 
     // [ ] If a token is in local storage it should be removed,
     // [ ] and a message saying "Goodbye!" should be set in its proper state.
-    // ? setMessage("Goodbye!");
+    setMessage("Goodbye!");
     // [x] In any case, we should redirect the browser back to the login screen, using the helper above.
     redirectToLogin();
   };
 
-  const login = ({ username, password }) => {
-    // ✨ implement
-    // We should flush the message state, turn on the spinner
-    // and launch a request to the proper endpoint.
-    // On success, we should set the token to local storage in a 'token' key,
-    // put the server success message in its proper state, and redirect
-    // to the Articles screen. Don't forget to turn off the spinner!
-    // [ ] axios.post(url, payload)
-    // [ ] navigate to /articles
+  const login = (username, password) => {
+    // * args started as {(username, password)}, may need to change it back later
+    // [x]  We should flush the message state,
+    setMessage("");
+    // [x]  turn on the spinner
+    setSpinnerOn(true);
+    // [x]  and launch a request to the proper endpoint.
+    axios
+      .post(loginUrl, { username, password })
+      .then((res) => {
+        // [x]  On success, we should set the token to local storage in a 'token' key,
+        localStorage.setItem("token", res.data.token);
+        // [x]  put the server success message in its proper state,
+        setMessage(res.data.message);
+        setSpinnerOn(false); ////  move this to getArticles once we have it ready
+        // [x]  and redirect to the Articles screen. Don't forget to turn off the spinner!
+        redirectToArticles();
+        // [ ] get articles (but maybe do this as a useEffect somewhere else?)
+      })
+
+      .catch((err) => {
+        console.log(err);
+      });
   };
 
   const getArticles = () => {
-    // ✨ implement
-    // We should flush the message state, turn on the spinner
-    // and launch an authenticated request to the proper endpoint.
-    // On success, we should set the articles in their proper state and
-    // put the server success message in its proper state.
-    // If something goes wrong, check the status of the response:
-    // if it's a 401 the token might have gone bad, and we should redirect to login.
-    // Don't forget to turn off the spinner!
-    /*
-    [ ] axios.get(url)
-    [ ] setArticles accordingly
-    */
+    // [ ] We should flush the message state, turn on the spinner
+    setMessage("");
+    setSpinnerOn(true);
+    // [ ] and launch an authenticated request to the proper endpoint.
+    //      - axiosWithAuth().get(url)
+    // [ ] On success, we should set the articles in their proper state and
+    // [ ] put the server success message in its proper state.
+    //      - setMessage(res.data.message)
+    //      - setArticles accordingly
+    // [ ] If something goes wrong, check the status of the response:
+    // [ ] if it's a 401 the token might have gone bad, and we should redirect to login.
+    // [ ] Don't forget to turn off the spinner!
+    //      - setSpinnerOn(false);
   };
 
   const postArticle = (article) => {
@@ -87,8 +105,8 @@ export default function App() {
   return (
     // ✨ fix the JSX: `Spinner`, `Message`, `LoginForm`, `ArticleForm` and `Articles` expect props ❗
     <>
-      <Spinner />
-      <Message />
+      <Spinner spinnerOn={spinnerOn} />
+      <Message message={message} />
       <button id="logout" onClick={logout}>
         Logout from app
       </button>
@@ -97,7 +115,7 @@ export default function App() {
         {/* <-- do not change this line */}
         <h1>Advanced Web Applications</h1>
         <nav>
-          <NavLink id="loginScreen" to="/login">
+          <NavLink id="loginScreen" to="/">
             Login
           </NavLink>
           <NavLink id="articlesScreen" to="/articles">
@@ -105,14 +123,21 @@ export default function App() {
           </NavLink>
         </nav>
         <Routes>
-          <Route path="/" element={<LoginForm />} />
-          <Route path="/login" element={<LoginForm />} />
+          <Route
+            path="/"
+            element={
+              <LoginForm
+                login={login}
+                redirectToArticles={redirectToArticles}
+              />
+            }
+          />
           <Route
             path="articles"
             element={
               <>
                 <ArticleForm />
-                <Articles />
+                <Articles getArticles={getArticles} />
               </>
             }
           />
