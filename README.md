@@ -57,7 +57,7 @@ The endpoints needed for this project are the following:
   - Expects an `Authorization` request header containing a valid auth token
   - The response to a proper request includes `200 OK` and a success message
 
-❗ Test drive all these endpoints with [Postman](https://www.postman.com/downloads/) before starting with the project.
+- [x] Test drive all these endpoints with [Postman](https://www.postman.com/downloads/) before starting with the project.
 
 ## MVP
 
