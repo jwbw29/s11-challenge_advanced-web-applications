@@ -79,7 +79,6 @@ export default function App() {
         setMessage(res.data.message);
         // [x] Don't forget to turn off the spinner!
         setSpinnerOn(false);
-        console.log(res);
       })
       .catch((err) => {
         // [x] If something goes wrong, check the status of the response:
