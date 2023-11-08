@@ -54,7 +54,7 @@ export default function App() {
         localStorage.setItem("token", res.data.token);
         // [x]  put the server success message in its proper state,
         setMessage(res.data.message);
-        setSpinnerOn(false); 
+        setSpinnerOn(false);
         // [x]  and redirect to the Articles screen. Don't forget to turn off the spinner!
         redirectToArticles();
         // [x] get articles (but maybe do this as a useEffect somewhere else?)
@@ -96,8 +96,14 @@ export default function App() {
     // The flow is very similar to the `getArticles` function.
     // You'll know what to do! Use log statements or breakpoints to inspect the response from the server.
     // [ ] axios.post(url, article/article_id)
-    // [ ] setArticles accordingly
-    //   ? setArticles([...articles, article])
+    axiosWithAuth()
+      .post(articlesUrl, article)
+      .then((res) => {
+        setMessage(res.data.message);
+        // [ ] setArticles accordingly
+        setArticles([...articles, article]);
+      })
+      .catch((err) => console.log(err));
   };
 
   const updateArticle = ({ article_id, article }) => {
@@ -148,7 +154,7 @@ export default function App() {
             path="articles"
             element={
               <>
-                <ArticleForm />
+                <ArticleForm postArticle={postArticle} />
                 <Articles getArticles={getArticles} articles={articles} />
               </>
             }

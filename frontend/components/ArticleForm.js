@@ -7,6 +7,9 @@ export default function ArticleForm(props) {
   const [values, setValues] = useState(initialFormValues);
   // ✨ where are my props? Destructure them here
 
+  const { postArticle, updateArticle, currentArticle, setCurrentArticleId } =
+    props;
+
   useEffect(() => {
     // ✨ implement
     // Every time the `currentArticle` prop changes, we should check it for truthiness:
@@ -24,6 +27,9 @@ export default function ArticleForm(props) {
     // ✨ implement
     // We must submit a new post or update an existing one,
     // depending on the truthyness of the `currentArticle` prop.
+    // - currentArticle ? updateArticle() : postArticle();
+    postArticle(values);
+    setValues(initialFormValues);
   };
 
   const isDisabled = () => {
@@ -32,11 +38,13 @@ export default function ArticleForm(props) {
     /**
      * username.trim().length >= 3 && password.trim().length >= 8 ? false : true
      */
-    return true;
+    return values.title.trim() && values.text.trim() && values.topic.trim()
+      ? false
+      : true;
   };
 
   const cancelEdit = () => {
-    // [ ] Reset the form to initial values on click
+    // [x] Reset the form to initial values on click
     setValues(initialFormValues);
   };
 
