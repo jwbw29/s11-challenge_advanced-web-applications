@@ -15,10 +15,7 @@ export default function ArticleForm(props) {
     // currentArticleId ? setValues(c)
     // if it's truthy, we should set its title, text and topic into the corresponding values of the form. If it's not, we should reset the form back to initial values.
     if (currentArticleId) {
-      const articleToEdit = articles.find(
-        (article) => article.id === currentArticleId
-      );
-      setValues(articleToEdit);
+      setValues(articles.find((art) => art.article_id === currentArticleId));
     }
   }, [currentArticleId]);
 
@@ -54,9 +51,9 @@ export default function ArticleForm(props) {
   };
 
   return (
-    // [ ] ✨ fix the JSX: make the heading display either "Edit" or "Create"
-    // [ ] and replace Function.prototype with the correct function
+    // [x] and replace Function.prototype with the correct function
     <form id="form" onSubmit={onSubmit}>
+      {/* // [ ] fix the JSX: make the heading display either "Edit" or "Create" */}
       <h2>Create Article</h2>
       <input
         maxLength={50}
