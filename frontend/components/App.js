@@ -31,8 +31,9 @@ export default function App() {
   const logout = () => {
     // ✨ implement
 
-    // [ ] If a token is in local storage it should be removed,
-    // [ ] and a message saying "Goodbye!" should be set in its proper state.
+    // [x] If a token is in local storage it should be removed,
+    localStorage.removeItem("token");
+    // [x] and a message saying "Goodbye!" should be set in its proper state.
     setMessage("Goodbye!");
     // [x] In any case, we should redirect the browser back to the login screen, using the helper above.
     redirectToLogin();
@@ -71,17 +72,20 @@ export default function App() {
     axiosWithAuth()
       .get(articlesUrl)
       .then((res) => {
-        // [ ] On success, we should set the articles in their proper state and
+        // [x] On success, we should set the articles in their proper state and
         setArticles(res.data.articles);
-        // [ ] put the server success message in its proper state.
+        // [x] put the server success message in its proper state.
         setMessage(res.data.message);
-        // [ ] Don't forget to turn off the spinner!
+        // [x] Don't forget to turn off the spinner!
         setSpinnerOn(false);
         console.log(res);
       })
       .catch((err) => {
-        // [ ] If something goes wrong, check the status of the response:
-        // [ ] if it's a 401 the token might have gone bad, and we should redirect to login.
+        // [x] If something goes wrong, check the status of the response:
+        // [x] if it's a 401 the token might have gone bad, and we should redirect to login.
+        err.response.status === 401 ? redirectToLogin() : console.log(err);
+        setSpinnerOn(false);
+        setMessage(err.message);
         console.log(err);
       });
   };
