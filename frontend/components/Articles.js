@@ -3,11 +3,10 @@ import { Navigate } from "react-router-dom";
 import PT from "prop-types";
 
 export default function Articles(props) {
-  // ✨ where are my props? Destructure them here
-  const { getArticles, articles } = props;
-  // ✨ implement conditional logic: if no token exists
-  
-  // [x] we should render a Navigate to login screen (React Router v.6)
+  // [x] where are my props? Destructure them here
+  const { getArticles, articles, setCurrentArticleId } = props;
+
+  // [x] implement conditional logic: if no token exists we should render a Navigate to login screen (React Router v.6)
   if (!localStorage.token) {
     return <Navigate to="/" />;
   }
@@ -16,6 +15,14 @@ export default function Articles(props) {
     // [x] grab the articles here, on first render only
     getArticles();
   }, []);
+
+  const handleEdit = (id) => {
+    setCurrentArticleId(id);
+  };
+
+  const handleDelete = (article) => {
+    console.log(article);
+  };
 
   return (
     // ✨ fix the JSX: replace `Function.prototype` with actual functions
@@ -33,10 +40,10 @@ export default function Articles(props) {
                   <p>Topic: {art.topic}</p>
                 </div>
                 <div>
-                  <button disabled={true} onClick={Function.prototype}>
+                  <button onClick={() => handleEdit(art.article_id)}>
                     Edit
                   </button>
-                  <button disabled={true} onClick={Function.prototype}>
+                  <button onClick={() => handleDelete(art.article_id)}>
                     Delete
                   </button>
                 </div>

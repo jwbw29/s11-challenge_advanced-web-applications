@@ -99,7 +99,7 @@ export default function App() {
       .post(articlesUrl, article)
       .then((res) => {
         setMessage(res.data.message);
-        // [ ] setArticles accordingly
+        // [x] setArticles accordingly
         setArticles([...articles, article]);
       })
       .catch((err) => console.log(err));
@@ -107,9 +107,14 @@ export default function App() {
 
   const updateArticle = ({ article_id, article }) => {
     // ✨ implement
+    // setCurrentArticleId(article_id);
     // [ ] axios.put(url, article/article_id)
-    // [ ] setArticles accordingly
-    // [ ] might need to make sure we're loading articles on mount?
+    axios
+      .put(articlesUrl, article_id)
+      .then((res) => console.log(res))
+      // [ ] setArticles accordingly
+      // [ ] might need to make sure we're loading articles on mount?
+      .catch((err) => console.log(err));
   };
 
   const deleteArticle = (article_id) => {
@@ -153,8 +158,16 @@ export default function App() {
             path="articles"
             element={
               <>
-                <ArticleForm postArticle={postArticle} />
-                <Articles getArticles={getArticles} articles={articles} />
+                <ArticleForm
+                  currentArticleId={currentArticleId}
+                  postArticle={postArticle}
+                  articles={articles}
+                />
+                <Articles
+                  getArticles={getArticles}
+                  articles={articles}
+                  setCurrentArticleId={setCurrentArticleId}
+                />
               </>
             }
           />

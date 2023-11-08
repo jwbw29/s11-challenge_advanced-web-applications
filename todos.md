@@ -1,8 +1,7 @@
 # Where to pick up
 
 - editing an article
-    - click edit, on click -> set the currentArticleId somehow
-    - populate form values with currentArticleId data
+    - need to fix the useEffect in ArticleForm. When I click edit, values aren't getting set correctly
 
 - deleting an article
     - on click -> axiosWithAuth().delete(url, currentArticleId) //make sure the payload matches expected
