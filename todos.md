@@ -1,11 +1,15 @@
 # Where to pick up
 
 - editing an article
-    - need to fix the useEffect in ArticleForm. When I click edit, values aren't getting set correctly
+
+  - VERY CLOSE
+  - problem: the payload i'm sending in updateArticle is sending article_id, text, title and topic BUT **it does not need to send article_id**
+  - Need to figure out how to take article_id out of the payload
+    - Payload is being sent from `values` in `updateArticle(currentArticleId, values)`
+    - maybe need to send these values WITHOUT the id since we're already sending `currentArticleId`
 
 - deleting an article
-    - on click -> axiosWithAuth().delete(url, currentArticleId) //make sure the payload matches expected
-
+  - on click -> axiosWithAuth().delete(url, currentArticleId) //make sure the payload matches expected
 
 # Tests to Pass
 
