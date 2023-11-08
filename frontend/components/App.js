@@ -95,7 +95,7 @@ export default function App() {
     // ✨ implement
     // The flow is very similar to the `getArticles` function.
     // You'll know what to do! Use log statements or breakpoints to inspect the response from the server.
-    // [ ] axios.post(url, article/article_id)
+    // [x] axios.post(url, article/article_id)
     axiosWithAuth()
       .post(articlesUrl, article)
       .then((res) => {

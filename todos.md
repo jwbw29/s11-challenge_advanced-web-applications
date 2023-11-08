@@ -1,5 +1,12 @@
 # Where to pick up
 
+- editing an article
+    - click edit, on click -> set the currentArticleId somehow
+    - populate form values with currentArticleId data
+
+- deleting an article
+    - on click -> axiosWithAuth().delete(url, currentArticleId) //make sure the payload matches expected
+
 
 # Tests to Pass
 
