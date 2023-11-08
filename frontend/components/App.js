@@ -22,9 +22,10 @@ export default function App() {
   const redirectToLogin = () => {
     navigate("/");
   };
+
   const redirectToArticles = () => {
     /* ✨ implement */
-    // [ ] When would I need to redirect to articles? The only other landing pages is login, right?
+    // [x] When would I need to redirect to articles? The only other landing pages is login, right?
     navigate("/articles");
   };
 
@@ -53,10 +54,10 @@ export default function App() {
         localStorage.setItem("token", res.data.token);
         // [x]  put the server success message in its proper state,
         setMessage(res.data.message);
-        setSpinnerOn(false); ////  move this to getArticles once we have it ready
+        setSpinnerOn(false); 
         // [x]  and redirect to the Articles screen. Don't forget to turn off the spinner!
         redirectToArticles();
-        // [ ] get articles (but maybe do this as a useEffect somewhere else?)
+        // [x] get articles (but maybe do this as a useEffect somewhere else?)
       })
 
       .catch((err) => {
