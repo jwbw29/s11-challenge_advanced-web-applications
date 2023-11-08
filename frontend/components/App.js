@@ -15,7 +15,7 @@ export default function App() {
   // ✨ MVP can be achieved with these states
   const [message, setMessage] = useState("");
   const [articles, setArticles] = useState([]);
-  const [currentArticleId, setCurrentArticleId] = useState();
+  const [currentArticleId, setCurrentArticleId] = useState(); //edit and delete
   const [spinnerOn, setSpinnerOn] = useState(false);
 
   const navigate = useNavigate();
@@ -64,19 +64,26 @@ export default function App() {
   };
 
   const getArticles = () => {
-    // [ ] We should flush the message state, turn on the spinner
+    // [x] We should flush the message state, turn on the spinner
     setMessage("");
     setSpinnerOn(true);
-    // [ ] and launch an authenticated request to the proper endpoint.
-    //      - axiosWithAuth().get(url)
-    // [ ] On success, we should set the articles in their proper state and
-    // [ ] put the server success message in its proper state.
-    //      - setMessage(res.data.message)
-    //      - setArticles accordingly
-    // [ ] If something goes wrong, check the status of the response:
-    // [ ] if it's a 401 the token might have gone bad, and we should redirect to login.
-    // [ ] Don't forget to turn off the spinner!
-    //      - setSpinnerOn(false);
+    // [x] and launch an authenticated request to the proper endpoint.
+    axiosWithAuth()
+      .get(articlesUrl)
+      .then((res) => {
+        // [ ] On success, we should set the articles in their proper state and
+        setArticles(res.data.articles);
+        // [ ] put the server success message in its proper state.
+        setMessage(res.data.message);
+        // [ ] Don't forget to turn off the spinner!
+        setSpinnerOn(false);
+        console.log(res);
+      })
+      .catch((err) => {
+        // [ ] If something goes wrong, check the status of the response:
+        // [ ] if it's a 401 the token might have gone bad, and we should redirect to login.
+        console.log(err);
+      });
   };
 
   const postArticle = (article) => {
@@ -137,7 +144,7 @@ export default function App() {
             element={
               <>
                 <ArticleForm />
-                <Articles getArticles={getArticles} />
+                <Articles getArticles={getArticles} articles={articles} />
               </>
             }
           />
