@@ -160,6 +160,7 @@ export default function App() {
               <>
                 <ArticleForm
                   currentArticleId={currentArticleId}
+                  setCurrentArticleId={setCurrentArticleId}
                   postArticle={postArticle}
                   articles={articles}
                 />

@@ -7,7 +7,13 @@ export default function ArticleForm(props) {
   const [values, setValues] = useState(initialFormValues);
 
   // [x] where are my props? Destructure them here
-  const { postArticle, updateArticle, currentArticleId, articles } = props;
+  const {
+    postArticle,
+    updateArticle,
+    setCurrentArticleId,
+    currentArticleId,
+    articles,
+  } = props;
 
   useEffect(() => {
     // ✨ implement
@@ -48,6 +54,7 @@ export default function ArticleForm(props) {
   const cancelEdit = () => {
     // [x] Reset the form to initial values on click
     setValues(initialFormValues);
+    setCurrentArticleId(null);
   };
 
   return (
