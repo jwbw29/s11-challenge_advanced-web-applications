@@ -30,13 +30,13 @@ export default function ArticleForm(props) {
     setValues({ ...values, [id]: value });
   };
 
-  const onSubmit = (evt) => {
-    evt.preventDefault();
+  const onSubmit = () => {
     // ✨ implement
     // We must submit a new post or update an existing one,
     // depending on the truthyness of the `currentArticle` prop.
-    // - currentArticle ? updateArticle(article.article_id, values) : postArticle(values);
-    postArticle(values);
+    currentArticleId
+      ? updateArticle(currentArticleId, values)
+      : postArticle(values);
     setValues(initialFormValues);
   };
 
@@ -82,12 +82,20 @@ export default function ArticleForm(props) {
         <option value="React">React</option>
         <option value="Node">Node</option>
       </select>
-      <div className="button-group">
-        <button disabled={isDisabled()} id="submitArticle">
-          Submit
-        </button>
-        <button onClick={cancelEdit}>Cancel edit</button>
-      </div>
+      {currentArticleId ? (
+        <div className="button-group">
+          <button disabled={isDisabled()} id="submitArticle">
+            Submit
+          </button>
+          <button onClick={cancelEdit}>Cancel edit</button>{" "}
+        </div>
+      ) : (
+        <div className="button-group">
+          <button disabled={isDisabled()} id="submitArticle">
+            Submit
+          </button>
+        </div>
+      )}
     </form>
   );
 }

@@ -78,7 +78,6 @@ export default function App() {
         // [x] put the server success message in its proper state.
         setMessage(res.data.message);
         // [x] Don't forget to turn off the spinner!
-        setSpinnerOn(false);
       })
       .catch((err) => {
         // [x] If something goes wrong, check the status of the response:
@@ -87,7 +86,8 @@ export default function App() {
         setSpinnerOn(false);
         setMessage(err.message);
         console.log(err);
-      });
+      })
+      .finally(() => setSpinnerOn(false));
   };
 
   const postArticle = (article) => {
@@ -95,26 +95,39 @@ export default function App() {
     // The flow is very similar to the `getArticles` function.
     // You'll know what to do! Use log statements or breakpoints to inspect the response from the server.
     // [x] axios.post(url, article/article_id)
+    setMessage("");
+    setSpinnerOn(true);
     axiosWithAuth()
       .post(articlesUrl, article)
       .then((res) => {
+        setArticles([...articles, res.data.article]);
         setMessage(res.data.message);
         // [x] setArticles accordingly
-        setArticles([...articles, article]);
       })
-      .catch((err) => console.log(err));
+      .catch((err) => console.log(err))
+      .finally(() => setSpinnerOn(false));
   };
 
-  const updateArticle = ({ article_id, article }) => {
-    // ✨ implement
-    // setCurrentArticleId(article_id);
-    // [ ] axios.put(url, article/article_id)
-    axios
-      .put(articlesUrl, article_id)
-      .then((res) => console.log(res))
-      // [ ] setArticles accordingly
-      // [ ] might need to make sure we're loading articles on mount?
-      .catch((err) => console.log(err));
+  const updateArticle = (article_id, article) => {
+    setCurrentArticleId(article_id);
+    setMessage("");
+    setSpinnerOn(true);
+    // [x] axios.put(url, article/article_id)
+    axiosWithAuth()
+      .put(`${articlesUrl}/${article_id}`, article)
+      .then((res) => {
+        // [ ] setArticles accordingly
+        // [x] might need to make sure we're loading articles on mount?
+        console.log(res.data);
+        setArticles([...articles]);
+        setMessage(res.data.message);
+      })
+
+      .catch((err) => {
+        setMessage(err.response.data.message);
+        console.log(err.response.data.message);
+      })
+      .finally(() => setSpinnerOn(false));
   };
 
   const deleteArticle = (article_id) => {
@@ -163,6 +176,7 @@ export default function App() {
                   setCurrentArticleId={setCurrentArticleId}
                   postArticle={postArticle}
                   articles={articles}
+                  updateArticle={updateArticle}
                 />
                 <Articles
                   getArticles={getArticles}
