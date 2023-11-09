@@ -54,15 +54,16 @@ export default function App() {
         localStorage.setItem("token", res.data.token);
         // [x]  put the server success message in its proper state,
         setMessage(res.data.message);
-        setSpinnerOn(false);
         // [x]  and redirect to the Articles screen. Don't forget to turn off the spinner!
         redirectToArticles();
         // [x] get articles (but maybe do this as a useEffect somewhere else?)
       })
 
       .catch((err) => {
+        setMessage(err.response.data.message);
         console.log(err);
-      });
+      })
+      .finally(() => setSpinnerOn(false));
   };
 
   const getArticles = () => {
@@ -83,8 +84,7 @@ export default function App() {
         // [x] If something goes wrong, check the status of the response:
         // [x] if it's a 401 the token might have gone bad, and we should redirect to login.
         err.response.status === 401 ? redirectToLogin() : console.log(err);
-        setSpinnerOn(false);
-        setMessage(err.message);
+        setMessage(err.response.data.message);
         console.log(err);
       })
       .finally(() => setSpinnerOn(false));
@@ -104,7 +104,10 @@ export default function App() {
         setMessage(res.data.message);
         // [x] setArticles accordingly
       })
-      .catch((err) => console.log(err))
+      .catch((err) => {
+        setMessage(err.response.data.message);
+        console.log(err);
+      })
       .finally(() => setSpinnerOn(false));
   };
 
