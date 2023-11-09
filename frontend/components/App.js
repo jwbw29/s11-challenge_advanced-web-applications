@@ -122,8 +122,14 @@ export default function App() {
       .then((res) => {
         // [ ] setArticles accordingly
         // [x] might need to make sure we're loading articles on mount?
+        const newArticles = articles.map((article) => {
+          if (article.article_id === article_id) {
+            return res.data.article;
+          }
+          return article;
+        });
         console.log(res.data);
-        setArticles([...articles]);
+        setArticles(newArticles);
         setMessage(res.data.message);
       })
 

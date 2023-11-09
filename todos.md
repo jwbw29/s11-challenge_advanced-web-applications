@@ -1,13 +1,5 @@
 # Where to pick up
 
-- editing an article
-
-  - VERY CLOSE
-  - problem: the payload i'm sending in `updateArticle` is sending `article_id`, `text`, `title` and `topic` BUT **it does not need to send article_id**
-  - Need to figure out how to take article_id out of the payload
-    - Payload is being sent from `values` in `updateArticle(currentArticleId, values)`
-    - maybe need to send these values WITHOUT the id since we're already sending `currentArticleId`
-
 - deleting an article
   - on click -> axiosWithAuth().delete(url, currentArticleId) //make sure the payload matches expected
 
@@ -20,6 +12,6 @@
 5. [x] Submit button is disabled on page load, Review how to conditionally disable a button element.
 6. [x] Filling out the article form and submitting - resets the form - adds a new article to the page - a success message renders on the page
 7. [x] Clicking edit button populates the article information into the form - Review how to manipulate and use state and reset a form using initial values.
-8. [ ] Editing the form values and submitting - updates the edited article on the page - resets the form - a success message renders on the page - Review how to utilize state to set current values. - Review how to make PUT requests to an external API using Axios and how to manipulate and use state.
+8. [x] Editing the form values and submitting - updates the edited article on the page - resets the form - a success message renders on the page - Review how to utilize state to set current values. - Review how to make PUT requests to an external API using Axios and how to manipulate and use state.
 9. [ ] Clicking delete button on an article - removes it from the page - a success message renders on the page - Review how to make DELETE requests to an external API using Axios.
 10. [ ] Spinner renders on load/fetch
