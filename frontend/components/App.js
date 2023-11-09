@@ -145,10 +145,22 @@ export default function App() {
     // [ ] setArticles accordingly
     //   ? setArticles(articles.filter((article) => article.article_id !== article_id))
     console.log("id inside App.js", article_id);
+    setMessage("");
+    setSpinnerOn(true);
     axiosWithAuth()
       .delete(`${articlesUrl}/${article_id}`)
-      .then((res) => {console.log(res)})
-      .catch((err) => {console.log(err)});
+      .then((res) => {
+        setArticles(
+          articles.filter((article) => article.article_id !== article_id)
+        );
+        setMessage(res.data.message);
+        console.log(res);
+      })
+      .catch((err) => {
+        setMessage(err.response.data.message);
+        console.log(err);
+      })
+      .finally(() => setSpinnerOn(false));
   };
 
   return (

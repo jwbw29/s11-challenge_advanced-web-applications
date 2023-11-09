@@ -13,5 +13,5 @@
 6. [x] Filling out the article form and submitting - resets the form - adds a new article to the page - a success message renders on the page
 7. [x] Clicking edit button populates the article information into the form - Review how to manipulate and use state and reset a form using initial values.
 8. [x] Editing the form values and submitting - updates the edited article on the page - resets the form - a success message renders on the page - Review how to utilize state to set current values. - Review how to make PUT requests to an external API using Axios and how to manipulate and use state.
-9. [ ] Clicking delete button on an article - removes it from the page - a success message renders on the page - Review how to make DELETE requests to an external API using Axios.
+9. [x] Clicking delete button on an article - removes it from the page - a success message renders on the page - Review how to make DELETE requests to an external API using Axios.
 10. [ ] Spinner renders on load/fetch
