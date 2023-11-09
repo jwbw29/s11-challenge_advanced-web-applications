@@ -128,7 +128,6 @@ export default function App() {
           }
           return article;
         });
-        console.log(res.data);
         setArticles(newArticles);
         setMessage(res.data.message);
       })
@@ -145,6 +144,11 @@ export default function App() {
     // [ ] axios.delete()
     // [ ] setArticles accordingly
     //   ? setArticles(articles.filter((article) => article.article_id !== article_id))
+    console.log("id inside App.js", article_id);
+    axiosWithAuth()
+      .delete(`${articlesUrl}/${article_id}`)
+      .then((res) => {console.log(res)})
+      .catch((err) => {console.log(err)});
   };
 
   return (
@@ -192,6 +196,7 @@ export default function App() {
                   getArticles={getArticles}
                   articles={articles}
                   setCurrentArticleId={setCurrentArticleId}
+                  deleteArticle={deleteArticle}
                 />
               </>
             }

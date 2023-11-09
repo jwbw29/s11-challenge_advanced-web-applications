@@ -4,7 +4,7 @@ import PT from "prop-types";
 
 export default function Articles(props) {
   // [x] where are my props? Destructure them here
-  const { getArticles, articles, setCurrentArticleId } = props;
+  const { getArticles, articles, setCurrentArticleId, deleteArticle } = props;
 
   // [x] implement conditional logic: if no token exists we should render a Navigate to login screen (React Router v.6)
   if (!localStorage.token) {
@@ -20,8 +20,8 @@ export default function Articles(props) {
     setCurrentArticleId(id);
   };
 
-  const handleDelete = (article) => {
-    console.log(article);
+  const handleDelete = (id) => {
+    deleteArticle(id);
   };
 
   return (
