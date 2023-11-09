@@ -112,12 +112,13 @@ export default function App() {
   };
 
   const updateArticle = (article_id, article) => {
+    const { title, text, topic } = article;
     setCurrentArticleId(article_id);
     setMessage("");
     setSpinnerOn(true);
     // [x] axios.put(url, article/article_id)
     axiosWithAuth()
-      .put(`${articlesUrl}/${article_id}`, article)
+      .put(`${articlesUrl}/${article_id}`, { title, text, topic })
       .then((res) => {
         // [ ] setArticles accordingly
         // [x] might need to make sure we're loading articles on mount?
