@@ -5,7 +5,7 @@ const axiosWithAuth = () => {
   const token = localStorage.getItem("token");
   const baseURL =
     process.env.NODE_ENV === "production"
-      ? "/api"
+      ? "https://s11-challenge-advanced-web-applications.vercel.app/api"
       : "http://localhost:9000/api";
 
   return axios.create({
