@@ -5,10 +5,8 @@
     "dev": "vite",
     "test": "cross-env NODE_ENV=testing jest --watch",
     "build": "vite build",
-    "heroku-postbuild": "npm run build",
     "frontend": "vite",
-    "backend": "node index.js",
-    "start": "npm run backend"
+    "start": "node index.js"
   },
   "devDependencies": {
     "@babel/core": "7.18.2",
